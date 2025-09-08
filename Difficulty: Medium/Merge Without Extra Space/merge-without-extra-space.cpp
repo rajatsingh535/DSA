@@ -5,17 +5,17 @@ class Solution {
         int n = a.size();
         int m = b.size();
         
-        
-        int i = n - 1 ,  j = 0;
+        int i = n-1 , j = 0;
         
         while(i>=0&&j<m&&a[i]>b[j]){
-            
             swap(a[i],b[j]);
             i-- , j++;
+            
         }
         
         sort(a.begin(),a.end());
         sort(b.begin(),b.end());
+      
    
     }
 };
