@@ -1,14 +1,21 @@
 class Solution {
   public:
     bool checkEqual(vector<int>& a, vector<int>& b) {
-      unordered_map<int , int>m1,m2;
-      for(auto i : a) m1[i]++;
-      for(auto i : b) m2[i]++;
-      
-      if(m1==m2) return true;
-      else return false;
-      
         
+     if (a.size() != b.size()) return false;
+        
+      unordered_map<int , int>m1;
+      for(auto i : a) m1[i]++;
+      
+      for(auto i : b){
+          if(m1.find(i)==m1.end()||m1[i]==0) return false;
+          m1[i]--;
+      }
+          
+  
+   
+      return true;
+    
     }
 };
 
