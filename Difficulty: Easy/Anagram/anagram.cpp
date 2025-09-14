@@ -2,18 +2,23 @@ class Solution {
   public:
     bool areAnagrams(string& s1, string& s2) {
         // code here
-        if(s1.size()!=s2.size()) return false;
-        int n = s1.size();
-        unordered_map<char,int> m;
-        for(auto c : s1){
-            m[c] ++;
+        int n = s1.length();
+        
+        if(s1.length()!=s2.length())
+            return false;
+            
+        unordered_map<char , int> h;
+        for(int i = 0; i < n; i++){
+            h[s1[i]]++;
+            h[s2[i]]--;
         }
-         for(auto c : s2){
-            m[c] --;
+        
+        
+        
+        for(auto i : h){
+            if(i.second != 0) return false;
         }
-          for(auto &p : m){
-           if(p.second!=0) return false;
-        }
+        
         
         return true;
         
