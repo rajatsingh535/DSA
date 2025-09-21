@@ -18,8 +18,6 @@ public:
         }
         
         return ans;
+        
     }
 };
-
-//Tc : 0(N) , Sc : 0(1)
-// Approach : Store prefix product while traversing left-to-right and suffix product while traversing right-to-left, multiplying both for each index to get the final result without using division.
