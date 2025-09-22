@@ -1,22 +1,19 @@
 class Solution {
 public:
-    int maxSubArray(vector<int>& b) {
-        int n = b.size(); 
-        if (n == 0) return 0;
-    
-        vector<int> p1(n + 1, 0); 
-        p1[0] = b[0];  
+    int maxSubArray(vector<int>& nums) {
+        int n = nums.size();
+        if(n == 0) return 0;
 
-        for (int i = 1; i < n; ++i) {
-            p1[i] = max(b[i], p1[i - 1] + b[i]);
-        }
-    
-        int maxSum = p1[0];
-        for (int i = 1; i < n; ++i) {
-            maxSum = max(maxSum, p1[i]);
+        int max_ending_here = nums[0];  // max sum ending at current index
+        int max_so_far = nums[0];       // global max sum
+
+        for(int i = 1; i < n; i++){
+            // either start new subarray at i or extend previous subarray
+            max_ending_here = max(nums[i], max_ending_here + nums[i]);
+            max_so_far = max(max_so_far, max_ending_here);
         }
 
-        return maxSum;
+        return max_so_far;
         
     }
 };
