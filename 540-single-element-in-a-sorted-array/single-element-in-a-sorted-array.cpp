@@ -1,18 +1,19 @@
 class Solution {
 public:
     int singleNonDuplicate(vector<int>& nums) {
-        int left = 0, right = nums.size() - 1;
-        while (left < right) {
-            int mid = (left + right) / 2;
-            if (mid % 2 == 1) {
-                mid--;
-            }
-            if (nums[mid] != nums[mid + 1]) {
-                right = mid;
+        int low=0,high=nums.size()-1;
+        while(low<high){
+            int mid= (low+high)/2;
+            if(mid-1>=0 && nums[mid]==nums[mid-1]){
+                if((mid-low+1) %2==0)low=mid+1;
+                else high = mid-2;
+            } else if(mid+1<nums.size()&& nums[mid]==nums[mid+1]) {
+                if((high-mid+1)%2==0)high=mid-1;
+                else low=mid+2;
             } else {
-                left = mid + 2;
+                return nums[mid];
             }
         }
-        return nums[left];
+        return nums[low];
     }
 };
