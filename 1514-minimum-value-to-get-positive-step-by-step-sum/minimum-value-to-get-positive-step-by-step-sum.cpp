@@ -1,30 +1,34 @@
 class Solution {
 public:
     int minStartValue(vector<int>& nums) {
-        // 1. Approach
-
-        // A. make a runnig sum then check if it value greater than 1
-        // B. if yes then exit else ans = start; break
-
+        //Optimal Approach
         int n = nums.size();
-        int ans = 1;
-        for (int i = 1; i <= 10001; i++) {
-            int runsum = i;
-            int ok = 1;
-            for (int j = 0; j < n; j++) {
-                runsum += nums[j];
-                if (runsum < 1) {
+        int sum = 0 , ans = 1;
+        int l = 1 , r = 10005;
+        while(l <= r){
+            int mid = (l+r)/2;
+            int sum = mid , ok = 1;
+            for(int i = 0; i < n; i++){
+                sum+= nums[i];
+                if(sum < 1){
                     ok = 0;
                     break;
                 }
             }
 
-            if (ok == 1) {
-                ans = i;
-                break;
+
+
+            if(ok){
+                ans = mid;
+                r = mid - 1;
+            }
+
+            else{
+                l = mid + 1;
             }
         }
 
         return ans;
+
     }
 };
