@@ -1,19 +1,8 @@
-#include <iostream>
-using namespace std;
-
-int main() {
-    int a, b, c;
-    cin >> a >> b >> c;   // taking input
-
-    // find greatest
-    int greatest = a;
-
-    if(b > greatest)
-        greatest = b;
-    if(c > greatest)
-        greatest = c;
-
-    cout << greatest;
-
-    return 0;
+int find_greatest_number(int a, int b, int c) {
+    if (a >= b && a >= c)
+        return a;
+    else if (b >= a && b >= c)
+        return b;
+    else
+        return c;
 }
