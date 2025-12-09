@@ -1,16 +1,20 @@
 class Solution {
 public:
-    std::vector<int> dailyTemperatures(std::vector<int>& temps) {
-        std::vector<int> results(temps.size());
-        std::stack<int> stack;
-        for (int i = 0; i < temps.size(); i++) {
-            while (!stack.empty() && temps[stack.top()] < temps[i]) {
-                results[stack.top()] = i - stack.top();
-                stack.pop();
+    vector<int> dailyTemperatures(vector<int>& temp) {
+        int n = temp.size();
+        stack<int> s;
+        vector<int> ans(n,0);
+        for(int i = n - 1; i >= 0; i--){
+            while(!s.empty() && temp[i] >= temp[s.top()]){
+                s.pop();
             }
-            stack.push(i);
+            if(!s.empty()){
+               ans[i] = s.top() - i;
+            }
+            s.push(i);
         }
 
-        return results;
+        return ans;
+        
     }
 };
