@@ -1,6 +1,14 @@
-string utility(int n) {
-    if (n % 2 == 0)
-        return "Friend";
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    if (n % 2 == 1)
+        cout << "You";
     else
-        return "You";
+        cout << "Friend";
+
+    return 0;
 }
