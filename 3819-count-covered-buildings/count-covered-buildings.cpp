@@ -1,33 +1,59 @@
-const int SZ=100001;
-int xMin[SZ], xMax[SZ], yMin[SZ], yMax[SZ];
 class Solution {
 public:
-    static int countCoveredBuildings(int n, vector<vector<int>>& buildings) {
-        int M=0, N=0;
-        for(auto& B: buildings){
-            const int x=B[0], y=B[1];
-            M=max(x, M);
-            N=max(y, N);
-        }
-        memset(xMax, 0, sizeof(int)*(N+1));
-        memset(yMax, 0, sizeof(int)*(M+1));
-        fill(xMin, xMin+(N+1), INT_MAX);
-        fill(yMin, yMin+(M+1), INT_MAX);
+    int countCoveredBuildings(int n, vector<vector<int>>& buildings) {
 
-        for(auto& B: buildings){
-            const int x=B[0], y=B[1];
-            xMin[y]=min(xMin[y], x);
-            xMax[y]=max(xMax[y], x);
-            yMin[x]=min(yMin[x], y);
-            yMax[x]=max(yMax[x], y);
+        /*
+
+
+        1,2   2,2 -> count = 1  3,2   2,1    2,3
+        brute force one by one check for each x , y that up , down , right , left exist or not
+
+        optial check each direction one building exist
+        min , max x  axis and y aixs if exist
+        then it lie
+
+
+store 3*3 x and y axis min and max store kar le
+traverse in each building x and y lies in betwin  min and max then its covered building and increment the count
+
+
+
+
+
+
+        */
+
+
+    vector<int> minx(n+1,n+1);
+    vector<int> maxx(n+1,-1);
+    vector<int> miny(n+1,n+1);
+    vector<int> maxy(n+1,-1);
+
+    for(auto b : buildings){
+        int x = b[0];
+        int y = b[1];
+
+        minx[y] = min(minx[y] , x);
+        maxx[y] = max(maxx[y] , x);
+
+
+        miny[x] = min(miny[x] , y);
+        maxy[x] = max(maxy[x] , y);
+    }
+
+
+    int ans = 0;
+    for(auto b : buildings){
+        int x = b[0];
+        int y = b[1];
+        if(minx[y] < x && x < maxx[y] && miny[x] < y & y < maxy[x]) {
+            ans += 1;
         }
-        int cnt=0;
-        for(auto& B: buildings){
-            const int x=B[0], y=B[1];
-            const bool coverX=(xMin[y]<x & x<xMax[y]);
-            const bool coverY=(yMin[x]<y & y<yMax[x]);
-            cnt+=(coverX & coverY);
-        }
-        return cnt;
+    }
+
+
+    return ans;
+
+        
     }
 };
