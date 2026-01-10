@@ -13,6 +13,8 @@ public:
             }
         }
 
+        
+
         int total = 0;
         for (char c : s1) total += c;
         for (char c : s2) total += c;
