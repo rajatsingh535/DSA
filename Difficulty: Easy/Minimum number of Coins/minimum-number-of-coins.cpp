@@ -1,14 +1,28 @@
 class Solution {
   public:
-    int findMin(int n) {
-        int coins[] = {10, 5, 2, 1};
-        int count = 0;
+    int findMin(int N) {
         
-        for (int i = 0; i < 4; i++) {
-            count += n / coins[i];  // take as many as possible
-            n = n % coins[i];       // reduce remaining amount
+        int count = 0;
+    
+        int arr[] = {1,2,5,10};
+        
+        int i = 3;
+        
+        while(i >= 0){
+            if(arr[i] <= N){
+                while(N >= arr[i]){
+                    N -= arr[i];
+                    count++;
+                }
+            }
+            
+            i--;
+            
         }
         
+        
         return count;
+        
+        
     }
 };
