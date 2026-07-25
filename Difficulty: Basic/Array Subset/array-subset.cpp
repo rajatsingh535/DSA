@@ -1,22 +1,33 @@
 class Solution {
-  public:
-    
-    bool isSubset(vector<int> &a, vector<int> &b) {
-        unordered_map<int, int> freq;
+	public:
+	
+	bool isSubset(vector<int> &a, vector<int> &b) {
+		
+		unordered_map<int , int> freq;
+		
+		for(int x : a) {
+		    
+		    
+		    freq[x]++;
+		    
+		    
+		}
+		    
+		for(int x : b){
+		    
+		    if(freq[x] == 0){
+		        
+		        return false;
+		        
+		    }
+		        
+		        freq[x]--;
+		    
+		}
+		
+		
+		
+		return true;
+	}
 
-        for (int num : a) {
-            freq[num]++;
-        }
-
-        for (int num : b) {
-            if (freq[num] == 0) {
-                return false;
-            }
-            freq[num]--;
-        }
-
-        return true;
-      
-    }
 };
-
